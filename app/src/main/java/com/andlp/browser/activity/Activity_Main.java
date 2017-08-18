@@ -1,6 +1,8 @@
 package com.andlp.browser.activity;
 
+import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.andlp.browser.R;
 
+import java.io.InputStream;
 
 
 public class Activity_Main extends Activity_Base {
@@ -119,13 +122,18 @@ public class Activity_Main extends Activity_Base {
 
         main.addView(center);
 
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                try {
+                    AssetManager asm = getAssets();
+                    InputStream is = asm.open("base_bg.png");//name:图片的名称
+                    Drawable d = Drawable.createFromStream(is, null);
+                    main.setBackground(d);
+                }catch (Throwable t){t.printStackTrace();}
+            }
+        });
 
-//        try {
-//            AssetManager asm = getAssets();
-//            InputStream is = asm.open("base_bg.png");//name:图片的名称
-//            Drawable d = Drawable.createFromStream(is, null);
-//            main.setBackground(d);
-//        }catch (Throwable t){t.printStackTrace();}
+
 
 
 //        x.task().postDelayed(new Runnable() {
